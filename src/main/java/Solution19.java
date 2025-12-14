@@ -1,5 +1,3 @@
-import java.util.*;
-
 /*
  * @Description:
  * 生命游戏
@@ -18,7 +16,7 @@ import java.util.*;
  * 输入：board = [[1,1],[1,0]]
  * 输出：[[1,1],[1,1]]
  */
-class Solution {
+class Solution19 {
     public void gameOfLife(int[][] board) {
         int[] neighbors = {0, 1, -1};
 

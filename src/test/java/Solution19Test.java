@@ -1,5 +1,11 @@
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+
+import static org.junit.Assert.*;
+
 /**
- * L2023113404_19_Test - 生命游戏算法测试类
+ * Solution19Test - 生命游戏算法测试类
  * 
  * 测试用例设计总体原则：
  * 1. 等价类划分原则：
@@ -19,21 +25,18 @@
  *    - 周期性模式（如闪烁器）
  *    - 典型示例输入
  */
-public class L2023113404_19_Test {
+@RunWith(JUnit4.class)
+public class Solution19Test {
 
-    private Solution solution;
-
-    public L2023113404_19_Test() {
-        solution = new Solution();
-    }
+    private final Solution19 solution = new Solution19();
 
     /**
      * 测试目的：验证示例1的输入输出正确性
      * 测试用例：board = [[0,1,0],[0,0,1],[1,1,1],[0,0,0]]
      * 预期结果：[[0,0,0],[1,0,1],[0,1,1],[0,1,0]]
      */
+    @Test
     public void testGameOfLifeExample1() {
-        System.out.println("测试示例1:");
         int[][] board = {
             {0, 1, 0},
             {0, 0, 1},
@@ -48,16 +51,8 @@ public class L2023113404_19_Test {
             {0, 1, 0}
         };
         
-        System.out.println("执行前:");
-        printBoard(board);
         solution.gameOfLife(board);
-        System.out.println("执行后:");
-        printBoard(board);
-        System.out.println("期望结果:");
-        printBoard(expected);
-        boolean passed = arraysEqual(board, expected);
-        System.out.println("测试结果: " + (passed ? "通过" : "失败"));
-        System.out.println("--------------------");
+        assertTrue("示例1测试失败", arraysEqual(board, expected));
     }
 
     /**
@@ -65,8 +60,8 @@ public class L2023113404_19_Test {
      * 测试用例：board = [[1,1],[1,0]]
      * 预期结果：[[1,1],[1,1]]
      */
+    @Test
     public void testGameOfLifeExample2() {
-        System.out.println("测试示例2:");
         int[][] board = {
             {1, 1},
             {1, 0}
@@ -77,16 +72,8 @@ public class L2023113404_19_Test {
             {1, 1}
         };
         
-        System.out.println("执行前:");
-        printBoard(board);
         solution.gameOfLife(board);
-        System.out.println("执行后:");
-        printBoard(board);
-        System.out.println("期望结果:");
-        printBoard(expected);
-        boolean passed = arraysEqual(board, expected);
-        System.out.println("测试结果: " + (passed ? "通过" : "失败"));
-        System.out.println("--------------------");
+        assertTrue("示例2测试失败", arraysEqual(board, expected));
     }
 
     /**
@@ -94,8 +81,8 @@ public class L2023113404_19_Test {
      * 测试用例：3x3全为0的网格
      * 预期结果：所有细胞保持死亡状态
      */
+    @Test
     public void testGameOfLifeAllDead() {
-        System.out.println("测试所有细胞都是死细胞的情况:");
         int[][] board = {
             {0, 0, 0},
             {0, 0, 0},
@@ -108,16 +95,8 @@ public class L2023113404_19_Test {
             {0, 0, 0}
         };
         
-        System.out.println("执行前:");
-        printBoard(board);
         solution.gameOfLife(board);
-        System.out.println("执行后:");
-        printBoard(board);
-        System.out.println("期望结果:");
-        printBoard(expected);
-        boolean passed = arraysEqual(board, expected);
-        System.out.println("测试结果: " + (passed ? "通过" : "失败"));
-        System.out.println("--------------------");
+        assertTrue("全死细胞测试失败", arraysEqual(board, expected));
     }
 
     /**
@@ -125,8 +104,8 @@ public class L2023113404_19_Test {
      * 测试用例：3x3网格，中心为活细胞，其余均为死细胞
      * 预期结果：中心活细胞死亡，其他保持不变
      */
+    @Test
     public void testGameOfLifeUnderpopulation() {
-        System.out.println("测试活细胞因孤独而死亡的情况:");
         int[][] board = {
             {0, 0, 0},
             {0, 1, 0},
@@ -139,16 +118,8 @@ public class L2023113404_19_Test {
             {0, 0, 0}
         };
         
-        System.out.println("执行前:");
-        printBoard(board);
         solution.gameOfLife(board);
-        System.out.println("执行后:");
-        printBoard(board);
-        System.out.println("期望结果:");
-        printBoard(expected);
-        boolean passed = arraysEqual(board, expected);
-        System.out.println("测试结果: " + (passed ? "通过" : "失败"));
-        System.out.println("--------------------");
+        assertTrue("孤独死亡测试失败", arraysEqual(board, expected));
     }
 
     /**
@@ -156,8 +127,8 @@ public class L2023113404_19_Test {
      * 测试用例：2x2全为活细胞的网格
      * 预期结果：所有活细胞继续保持存活
      */
+    @Test
     public void testGameOfLifeSurvival() {
-        System.out.println("测试活细胞在理想环境下存活的情况:");
         int[][] board = {
             {1, 1},
             {1, 1}
@@ -168,16 +139,8 @@ public class L2023113404_19_Test {
             {1, 1}
         };
         
-        System.out.println("执行前:");
-        printBoard(board);
         solution.gameOfLife(board);
-        System.out.println("执行后:");
-        printBoard(board);
-        System.out.println("期望结果:");
-        printBoard(expected);
-        boolean passed = arraysEqual(board, expected);
-        System.out.println("测试结果: " + (passed ? "通过" : "失败"));
-        System.out.println("--------------------");
+        assertTrue("理想存活测试失败", arraysEqual(board, expected));
     }
 
     /**
@@ -185,8 +148,8 @@ public class L2023113404_19_Test {
      * 测试用例：3x3网格，死细胞被正好3个活细胞包围
      * 预期结果：中心死细胞复活
      */
+    @Test
     public void testGameOfLifeReproduction() {
-        System.out.println("测试死细胞因繁殖而复活的情况:");
         int[][] board = {
             {0, 1, 0},
             {0, 0, 1},
@@ -199,16 +162,8 @@ public class L2023113404_19_Test {
             {0, 0, 0}
         };
         
-        System.out.println("执行前:");
-        printBoard(board);
         solution.gameOfLife(board);
-        System.out.println("执行后:");
-        printBoard(board);
-        System.out.println("期望结果:");
-        printBoard(expected);
-        boolean passed = arraysEqual(board, expected);
-        System.out.println("测试结果: " + (passed ? "通过" : "失败"));
-        System.out.println("--------------------");
+        assertTrue("繁殖复活测试失败", arraysEqual(board, expected));
     }
 
     /**
@@ -216,8 +171,8 @@ public class L2023113404_19_Test {
      * 测试用例：3x3全为活细胞的网格
      * 预期结果：角落的活细胞因有4个邻居而死亡，边缘的活细胞因有5个邻居而死亡
      */
+    @Test
     public void testGameOfLifeOverpopulation() {
-        System.out.println("测试活细胞因过度拥挤而死亡的情况:");
         int[][] board = {
             {1, 1, 1},
             {1, 1, 1},
@@ -230,16 +185,8 @@ public class L2023113404_19_Test {
             {1, 0, 1}
         };
         
-        System.out.println("执行前:");
-        printBoard(board);
         solution.gameOfLife(board);
-        System.out.println("执行后:");
-        printBoard(board);
-        System.out.println("期望结果:");
-        printBoard(expected);
-        boolean passed = arraysEqual(board, expected);
-        System.out.println("测试结果: " + (passed ? "通过" : "失败"));
-        System.out.println("--------------------");
+        assertTrue("过度拥挤测试失败", arraysEqual(board, expected));
     }
 
     /**
@@ -247,8 +194,8 @@ public class L2023113404_19_Test {
      * 测试用例：5x5网格，横向三个连续活细胞位于中央行
      * 预期结果：纵向三个连续活细胞位于中央列
      */
+    @Test
     public void testGameOfLifeBlinkerPattern() {
-        System.out.println("测试经典闪烁器模式:");
         int[][] board = {
             {0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0},
@@ -265,61 +212,34 @@ public class L2023113404_19_Test {
             {0, 0, 0, 0, 0}
         };
         
-        System.out.println("执行前:");
-        printBoard(board);
         solution.gameOfLife(board);
-        System.out.println("执行后:");
-        printBoard(board);
-        System.out.println("期望结果:");
-        printBoard(expected);
-        boolean passed = arraysEqual(board, expected);
-        System.out.println("测试结果: " + (passed ? "通过" : "失败"));
-        System.out.println("--------------------");
+        assertTrue("闪烁器模式测试失败", arraysEqual(board, expected));
     }
 
-    // 辅助方法：打印二维数组
-    private void printBoard(int[][] board) {
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                System.out.print(board[i][j] + " ");
-            }
-            System.out.println();
-        }
-        System.out.println();
-    }
-
-    // 辅助方法：比较两个二维数组是否相等
+    /**
+     * 辅助方法：比较两个二维数组是否相等
+     * 
+     * @param a 第一个二维数组
+     * @param b 第二个二维数组
+     * @return 如果两个数组相等返回true，否则返回false
+     */
     private boolean arraysEqual(int[][] a, int[][] b) {
-        if (a.length != b.length) return false;
+        if (a.length != b.length) {
+            return false;
+        }
+        
         for (int i = 0; i < a.length; i++) {
-            if (a[i].length != b[i].length) return false;
+            if (a[i].length != b[i].length) {
+                return false;
+            }
+            
             for (int j = 0; j < a[i].length; j++) {
-                if (a[i][j] != b[i][j]) return false;
+                if (a[i][j] != b[i][j]) {
+                    return false;
+                }
             }
         }
+        
         return true;
-    }
-
-    // 运行所有测试
-    public void runAllTests() {
-        System.out.println("开始执行生命游戏算法测试");
-        System.out.println("========================");
-        
-        testGameOfLifeExample1();
-        testGameOfLifeExample2();
-        testGameOfLifeAllDead();
-        testGameOfLifeUnderpopulation();
-        testGameOfLifeSurvival();
-        testGameOfLifeReproduction();
-        testGameOfLifeOverpopulation();
-        testGameOfLifeBlinkerPattern();
-        
-        System.out.println("所有测试执行完毕");
-    }
-
-    // 主方法，用于运行测试
-    public static void main(String[] args) {
-        L2023113404_19_Test test = new L2023113404_19_Test();
-        test.runAllTests();
     }
 }
