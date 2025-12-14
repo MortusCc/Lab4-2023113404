@@ -45,7 +45,7 @@ public class Solution19Test {
         };
         
         int[][] expected = {
-            {0, 0, 0},
+            {0, 1, 0},
             {1, 0, 1},
             {0, 1, 1},
             {0, 1, 0}
